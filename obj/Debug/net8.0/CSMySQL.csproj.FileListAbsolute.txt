@@ -36,3 +36,4 @@ C:\Users\55499\Documents\CSMySQL\obj\Debug\net8.0\CSMySQL.pdb
 C:\Users\55499\Documents\CSMySQL\obj\Debug\net8.0\CSMySQL.genruntimeconfig.cache
 C:\Users\55499\Documents\CSMySQL\obj\Debug\net8.0\ref\CSMySQL.dll
 C:\Users\55499\Documents\CSMySQL\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\55499\Documents\CSMySQL\obj\Debug\net8.0\CSMySQL.sourcelink.json

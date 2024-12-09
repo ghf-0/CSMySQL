@@ -84,14 +84,15 @@ namespace MySqlDatabase
                         {
                             string password = Igets.Text("Enter password: ");               //
                                                                                             //  This better go somewhere else
-                            if (BCrypt.Net.BCrypt.Verify(password, reader.GetString(5)))    //
+                            if (BCrypt.Net.BCrypt.Verify(password, reader.GetString(6)))    //
                             {
-                                profile.Username = reader.GetString(0);
-                                profile.Location = reader.GetString(1);
-                                profile.Country = reader.GetString(2);
-                                profile.Balance = reader.GetFloat(3);
-                                profile.IsPremium = reader.GetInt32(4);
-                                profile.Passwordhash = reader.GetString(5);
+                                profile.Id = reader.GetInt32(0);
+                                profile.Username = reader.GetString(1);
+                                profile.Location = reader.GetString(2);
+                                profile.Country = reader.GetString(3);
+                                profile.Balance = reader.GetFloat(4);
+                                profile.IsPremium = reader.GetInt32(5);
+                                profile.Passwordhash = reader.GetString(6);
 
                                 Console.WriteLine("Profile loaded.");
                             }
@@ -120,10 +121,9 @@ namespace MySqlDatabase
         public static void ListProfiles()
         {
             Connection.Open();
+
             try
             {
-                
-
                 using (var command = new MySqlCommand(Query.listProfilesQuery, Connection))
                 using (var reader = command.ExecuteReader())
                 {
@@ -137,7 +137,10 @@ namespace MySqlDatabase
             {
                 Console.WriteLine($"LOL ERROR: {e}");
             }
-            Connection.Close();
+            finally
+            {
+                Connection.Close();
+            }
         }
 
         public static void DeleteProfile()
@@ -167,6 +170,35 @@ namespace MySqlDatabase
                 Console.WriteLine($"ERROR: {e}");
             }
             Connection.Close();
+        }
+
+        public static void UpdateProfile(Profile profile)
+        {
+            Connection.Open();
+
+            using (var command = new MySqlCommand(Query.updateProfileQuery, Connection))
+            {
+                command.Parameters.AddWithValue("@id", profile.Id);
+                command.Parameters.AddWithValue("@username", profile.Username);
+                command.Parameters.AddWithValue("@location", profile.Location);
+                command.Parameters.AddWithValue("@country", profile.Country);
+                command.Parameters.AddWithValue("@balance", profile.Balance);
+                command.Parameters.AddWithValue("@is_premium", profile.IsPremium);
+                command.Parameters.AddWithValue("@last_seen", DateTime.Now.ToString("HH:mm:ss"));
+
+                var rows = command.ExecuteNonQuery();
+
+                if (rows == 0)
+                {
+                    Console.WriteLine("There is no profile with the provided ID.");
+                    Connection.Close();
+                    return;
+                }
+
+                Console.WriteLine("Profile data updated.");
+                Connection.Close();
+                return;
+            }
         }
 
     }

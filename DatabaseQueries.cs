@@ -25,16 +25,15 @@ namespace DatabaseQueries
         ";
 
         public static string loadProfileQuery = @"
-        SELECT username, location, country, balance, is_premium, hash_pass FROM profiles WHERE username = @username
+        SELECT id, username, location, country, balance, is_premium, hash_pass FROM profiles WHERE username = @username
         ";
 
         public static string listProfilesQuery = @"SELECT username, location, country, balance, is_premium, last_seen FROM profiles";
         
         public static string updateProfileQuery = @"
         UPDATE profiles SET username = @username, location = @location, country = @country, balance = @balance, is_premium = @is_premium, last_seen = @last_seen
-        WHERE username = @name
-        "; // HUGE mistake. Should've included ID into the profile class since the beginning
-
+        WHERE id = @id
+        ";
         public static string deleteProfileQuery = @"DELETE FROM profiles WHERE username = @username";
     }
 }

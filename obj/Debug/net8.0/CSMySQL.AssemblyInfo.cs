@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSMySQL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6c3ea383a295f8361546008effc0da2af08cad0")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSMySQL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSMySQL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -5,7 +5,7 @@ namespace Userdata
 {
     class Profile(string username, string passwordhash, string location, string country, float balance, int ispremium)
     {
-        // public int Id { get; set; } = id; <-- IMPORTANT
+        public int? Id { get; set; }
         public string Username { get; set; } = username;
         public string Passwordhash { get; set; } = BCrypt.Net.BCrypt.HashPassword(passwordhash);
         public string Location { get; set; } = location;
@@ -65,6 +65,10 @@ namespace Userdata
                             IsPremium = 0;
                             break;
                         }
+
+                    case "pass":
+                    Passwordhash = BCrypt.Net.BCrypt.HashPassword(Igets.Text("Password: "));
+                    break;
 
                     default:
                         return;
