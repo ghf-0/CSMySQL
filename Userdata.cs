@@ -26,59 +26,21 @@ namespace Userdata
 
         public void EditInfo()
         {
-            while (true)
-            {
-                Console.WriteLine("What would you like to edit?");
-                string input = Igets.Text("1. Username\n2.Location\n3.Balance\n4.Premium status\n5. Go back\n>> ");
-
-                if (input.ToLower().Trim() == "")
-                {
-                    Console.WriteLine("Operation cancelled.");
-                    return;
-                }
-
-                switch (input) // redo this
-                {
-                    case "1":
-                        Username = Igets.Text("username >> ");
-                        break;
-
-                    case "2":
-                        Location = Igets.Text("location >> ");
-                        Country = Igets.Text("country >> ");
-                        break;
-
-                    case "3":
-                        Balance = Igets.NumFloat("balance >> ");
-                        break;
-
-                    case "4":
-                        bool premium = Igets.Bol("Is this profile premium? (y/n) >> ");
-
-                        if (premium)
-                        {
-                            IsPremium = 1;
-                            break;
-                        }
-                        else
-                        {
-                            IsPremium = 0;
-                            break;
-                        }
-
-                    case "pass":
-                    Passwordhash = BCrypt.Net.BCrypt.HashPassword(Igets.Text("Password: "));
-                    break;
-
-                    default:
-                        return;
-                }
-            }
+            Username = Igets.Text("Enter username: ");
+            Location = Igets.Text("Enter location: ");
+            Country = Igets.Text("Enter country: ");
+            Balance = Igets.NumFloat("Enter balance: ");
+            Passwordhash = BCrypt.Net.BCrypt.HashPassword(Igets.Text("Enter new password: ")); // doesn't work as intended
+            // Console.WriteLine(Passwordhash);
+            
         }
 
-        public bool Auth(string pass)
+        public bool Auth(string hash) // not good
         {
-            if (BCrypt.Net.BCrypt.Verify(pass, Passwordhash))
+            Console.WriteLine(Passwordhash);
+            string pass = Igets.Text("Enter password: ");
+            
+            if (BCrypt.Net.BCrypt.Verify(pass, hash))
             {
                 return true;
             }
